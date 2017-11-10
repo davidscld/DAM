@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main (void){
+
+int njugadores[6], ne, aux=0, dado, turno=0;
+char op;
+do{	//Va a guardar el numero de jugadores se quieren usar.
+
+	printf("Dame el numero de jugadores ");
+	scanf("%d", &ne);
+	
+}while(num>6 || num<2);
+
+//Creare un array, donde guardare las posiciones de los jugadores. Las posiciones se iran modificacion mientras que ninguno de los dos tenga un posicion distinta a
+// 	
+do{//Va cambiando el jugador
+
+	do{ //Recoge lo que ha sacado cada jugador
+		printf("Dame lo que has sacado jugador %d ", turno+1 );
+		scanf("%d", &dado);
+		
+	}while(dado<1 || dado>6);
+		 posicion[turno+]=dado;
+		  
+}while();
+
+}
