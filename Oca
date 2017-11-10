@@ -2,7 +2,7 @@
 #include <stdlib.h>
 int main (void){
 
-int njugadores[6], ne, aux=0, dado, turno=0;
+int njugadores[6]={0,0,0,0,0,0}, ne, aux=0, dado, turno=0;
 char op;
 do{	//Va a guardar el numero de jugadores se quieren usar.
 
@@ -23,5 +23,5 @@ do{//Va cambiando el jugador
 		 posicion[turno+]=dado;
 		  
 }while();
-
+// turno= (turno+1)%njugadores; // Cambia el turno del jugador;
 }
