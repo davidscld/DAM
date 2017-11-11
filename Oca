@@ -2,8 +2,9 @@
 #include <stdlib.h>
 int main (void){
 
-int posicion[6]={0,0,0,0,0,0}, ne, aux=0, dado, turno=0;
+int posicion[6]={0,0,0,0,0,0}, ne, casillas=15, dado, turno=0, i=0;
 char op;
+
 do{	//Va a guardar el numero de jugadores se quieren usar.
 
 	printf("Dame el numero de jugadores ");
@@ -12,21 +13,39 @@ do{	//Va a guardar el numero de jugadores se quieren usar.
 }while(ne>6 || ne<2);
 
 //Creare un array, donde guardare las posiciones de los jugadores. Las posiciones se iran modificacion mientras que ninguno de los dos tenga un posicion distinta a
-// 	
-do{//Va cambiando el jugador
+
+do{
+
+   do{//Va cambiando el jugador
 
  
-	do{
-		printf("Dame lo que has sacado jugador %d ", turno+1 );
-		turno=(turno+1)%ne;
-		scanf("%d", &dado);
+   		   	do{
+				 printf("Dame lo que has sacado jugador %d ", turno+1 );
+				 turno=(turno+1)%ne; //Va cambiando el turno de los jugadores
+				 scanf("%d", &dado);
 		
-	}while(dado<1 || dado>6);
+			}while(dado<1 || dado>6);
 	
-		 posicion[turno]+=dado;
-		 printf(" El jugador %d tiene %d\n ", turno, posicion[turno]);
-		 
+				 posicion[turno]+=dado;// Va sumando la puntuacion de los jugadores
+				
+				
+		 //Hace que retroceda las casillas en caso de pasarme de la meta 
+	  	 		    if(posicion[turno]>casillas){
+	  	 		    	posicion[turno]=casillas*2-posicion[turno];
+ 						  }			
  
-}while(posicion[turno]!=4);
-   printf("Adios");
+ }while(posicion[turno]!=casillas); //Mientras el jugador que este jugando no haya llegado a la meta
+
+
+printf("Ha ganado el jugador %d\n ", turno);
+
+		   for(i=turno; i<ne; i++){//Elimina el jugador que ha ganado del array.
+		   	
+  					posicion[i]=posicion[i+1];
+		   
+		   }
+    ne--;// Reduzco el array, eliminando el ganador
+
+}while(ne!=1);//Hace que se ejecute mientras que haya minimo dos jugadores.
+   system("pause");
 }
