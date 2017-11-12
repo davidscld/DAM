@@ -2,7 +2,7 @@
 #include <stdlib.h>
 int main (void){
 
-int posicion[6]={0,0,0,0,0,0}, ne, casillas=15, dado, turno=0, i=0;
+int posicion[6]={0,0,0,0,0,0}, ne, casillas=15, dado, turno=0, i=0, d=0;
 char op;
 
 do{	//Va a guardar el numero de jugadores se quieren usar.
@@ -27,12 +27,34 @@ do{
 			}while(dado<1 || dado>6);
 	
 				 posicion[turno]+=dado;// Va sumando la puntuacion de los jugadores
+
+//RESTRICCIONES DEL JUEGO				
+			
+//LA MUERTE
+			if(posicion[turno]==57){
 				
+					posicion[turno]=0;
+			}
+//HACE LOS SALTOS DE LAS OCAS
+	   
+	   for(i=0;(4+i*9)!=posicion[turno] && i<=6;i++);//Si empieza la oca en el 4
+				  
+				  if(i<=6){ //En el caso de que este en la posicion 
+				  	posicion[turno]=posicion[turno]+9;
+				  }
+	   
+	   for(d=0;(8+i*9)!=posicion[turno] && i<=5;i++);//Si empieza la oca en el 8
 				
-		 //Hace que retroceda las casillas en caso de pasarme de la meta 
+				if(i<=5){ //En el caso de que este en la posicion 
+				  	posicion[turno]=posicion[turno]+9;
+				  }
+				
+//Hace que retroceda las casillas en caso de pasarme de la meta 
 	  	 		    if(posicion[turno]>casillas){
 	  	 		    	posicion[turno]=casillas*2-posicion[turno];
- 						  }			
+ 						  }	
+						  
+	printf("\nEstas en la posicion %d\n  ", posicion[turno]);
  
  }while(posicion[turno]!=casillas); //Mientras el jugador que este jugando no haya llegado a la meta
 
@@ -46,6 +68,6 @@ printf("Ha ganado el jugador %d\n ", turno);
 		   }
     ne--;// Reduzco el array, eliminando el ganador
 
-}while(ne!=1);//Hace que se ejecute mientras que haya minimo dos jugadores.
-   system("pause");
+ 
+}while(ne!=1);//Hace que se ejecute mientras que haya minimo dos jugadores.   
 }
