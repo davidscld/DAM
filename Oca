@@ -40,13 +40,13 @@ do{
 	   for(i=0;(4+i*9)!=posicion[turno] && i<=5;i++);//Si empieza la oca en el 4
 				  
 				  if(i<=6){ //En el caso de que este en la posicion 
-				  	posicion[turno]=posicion[turno]+9;
+				  	posicion[turno]=posicion[turno]+4;
 				  }
 	   
 	   for(d=0;(8+i*9)!=posicion[turno] && i<=5;i++);//Si empieza la oca en el 8
 				
 				if(i<=5){ //En el caso de que este en la posicion 
-				  	posicion[turno]=posicion[turno]+9;
+				  	posicion[turno]=posicion[turno]+5;
 				  }
 				
 //Hace que retroceda las casillas en caso de pasarme de la meta 
