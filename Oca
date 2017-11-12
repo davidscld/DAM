@@ -2,7 +2,7 @@
 #include <stdlib.h>
 int main (void){
 
-int posicion[6]={0,0,0,0,0,0}, ne, casillas=15, dado, turno=0, i=0, d=0;
+int posicion[6]={0,0,0,0,0,0}, ne, casillas=63, dado, turno=0, i=0, d=0;
 char op;
 
 do{	//Va a guardar el numero de jugadores se quieren usar.
@@ -28,33 +28,73 @@ do{
 	
 				 posicion[turno]+=dado;// Va sumando la puntuacion de los jugadores
 
-//RESTRICCIONES DEL JUEGO				
+//////////////////////////////////////////////////////////RESTRICCIONES DEL JUEGO///////////////////////////////////////////////////////////				
 			
-//LA MUERTE
-			if(posicion[turno]==57){
-				
-					posicion[turno]=0;
-			}
 //HACE LOS SALTOS DE LAS OCAS
 	   
-	   for(i=0;(4+i*9)!=posicion[turno] && i<=5;i++);//Si empieza la oca en el 4
+    for(i=0;(4+i*9)!=posicion[turno] && i<=5;i++);//Si empieza la oca en el 4
 				  
-				  if(i<=6){ //En el caso de que este en la posicion 
-				  	posicion[turno]=posicion[turno]+4;
+		 if((4+i*9)==posicion[turno]){ //En el caso de que este en la posicion 
+		 
+	  			      posicion[turno]=posicion[turno]+4;
 				  }
 	   
-	   for(d=0;(8+i*9)!=posicion[turno] && i<=5;i++);//Si empieza la oca en el 8
+    for(d=0;(8+d*9)!=posicion[turno] && d<=5;d++);//Si empieza la oca en el 8
 				
-				if(i<=5){ //En el caso de que este en la posicion 
-				  	posicion[turno]=posicion[turno]+5;
+				if(d<=5){ //En el caso de que este en la posicion 
+	                  posicion[turno]=posicion[turno]+5;
 				  }
-				
+    switch(posicion[turno]){
+    
+//PUENTE		
+    	case 5:
+    		
+    		break;
+   		case 11:
+   			
+    		 break;
+//POSADA
+    	case 18:
+    		
+             break;
+//DADOS			
+    	case 25:
+    		
+    		break;
+    		
+   		case 52:
+   			
+   			break;
+//POZO   			
+        case 29:
+        	
+        	break;
+//LABERINTO
+       	case 41:
+       		
+       		break;
+//CARCEL
+        case 51:
+        	
+        	break;
+//LA MUERTE
+	 case 57:
+		posicion[turno]=0;
+        	break;		
+}
+//////////////////////////////////////////////////////////RESTRICCIONES DEL JUEGO///////////////////////////////////////////////////////////				
+
+			
 //Hace que retroceda las casillas en caso de pasarme de la meta 
 	  	 		    if(posicion[turno]>casillas){
-	  	 		    	posicion[turno]=casillas*2-posicion[turno];
- 						  }	
-						  
-	printf("\nEstas en la posicion %d\n  ", posicion[turno]);
+	  	 		    	
+	  	 		      		posicion[turno]=casillas*2-posicion[turno];
+ 					 }	
+
+ 					 
+
+//Te dice la posicion en la que estas						  
+printf("\nEstas en la posicion %d\n  ", posicion[turno]);
  
  }while(posicion[turno]!=casillas); //Mientras el jugador que este jugando no haya llegado a la meta
 
@@ -69,5 +109,5 @@ printf("Ha ganado el jugador %d\n ", turno);
     ne--;// Reduzco el array, eliminando el ganador
 
  
-}while(ne!=1);//Hace que se ejecute mientras que haya minimo dos jugadores.   
+}while(ne!=1);//Hace que se ejecute mientras que haya minimo dos jugadores.  
 }
