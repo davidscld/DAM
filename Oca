@@ -48,30 +48,33 @@ do{
     
 //PUENTE		
     	case 5:
-    		
-    		break;
+    		 posicion[turno]=11;
+   		break;
+   		
    		case 11:
-   			
-    		 break;
+   			 posicion[turno]=5;
+  		 break;
 //POSADA
     	case 18:
-    		
+    		if(boton==0){
+    			
+			}
              break;
 //DADOS			
     	case 25:
-    		
-    		break;
+    		 posicion[turno]=52;
+   		break;
     		
    		case 52:
-   			
-   			break;
+   			 posicion[turno]=25;
+        break;
 //POZO   			
         case 29:
         	
         	break;
 //LABERINTO
        	case 41:
-       		
+       		posicion[turno]=30;
        		break;
 //CARCEL
         case 51:
@@ -80,7 +83,7 @@ do{
 //LA MUERTE
 	 case 57:
 		posicion[turno]=0;
-        	break;		
+        	break;			
 }
 //////////////////////////////////////////////////////////RESTRICCIONES DEL JUEGO///////////////////////////////////////////////////////////				
 
