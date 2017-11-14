@@ -1,8 +1,8 @@
-	#include <stdio.h>
+		#include <stdio.h>
 	#include <stdlib.h>
 	int main (void){
 	
-	int posicion[6]={0,0,0,0,0,0}, ne, casillas=63, dado=0, turno=0, i=0, d=0, boton=0, aux=0, naux;
+	int posicion[6]={0,0,0,0,0,0}, ne, casillas=63, dado=0, turno=0, i=0, d=0, boton=0, aux=0, naux,posa=0;
 	char op;
 	
 	do{	//Va a guardar el numero de jugadores se quieren usar.
@@ -17,6 +17,10 @@
 	do{
 		if(posicion[turno]!=casillas){ //comprueba si el jugador todavia no ha ganado
 			
+			if(posicion[turno]==18 && posa==0){
+				posa=1;
+				turno=(turno+1)%ne;
+			}
 			
 			do{
 				printf("Jugador %d indica el dado: ",turno+1);
@@ -24,81 +28,77 @@
 			
 			}while(dado<1 || dado>6);
 			posicion[turno]+=dado;
-			printf("El jugador %d se encuentra en la posicion %d ",turno+1,posicion[turno]);
+			printf("\n El jugador %d se encuentra en la posicion %d \n",turno+1,posicion[turno]);
 			
 			//////////////////////////////////////////////////////////RESTRICCIONES DEL JUEGO///////////////////////////////////////////////////////////				
 				
-	//HACE LOS SALTOS DE LAS OCAS
+			//HACE LOS SALTOS DE LAS OCAS
 	 
-	    for(i=0;(4+i*9)!=posicion[turno] && i<=5;i++);//Si empieza la oca en el 4
+			    for(i=0;(4+i*9)!=posicion[turno] && i<=5;i++);//Si empieza la oca en el 4
+							  
+					 if((4+i*9)==posicion[turno]){ //En el caso de que este en la posicion 
+					 
+				  			      posicion[turno]=posicion[turno]+4;
+				  			      printf("\n OCA El jugador %d se encuentra en la posicion %d \n",turno+1,posicion[turno]);
+				  			      
+				  			      continue;
+							  }
+				   
+			    for(d=0;(8+d*9)!=posicion[turno] && d<=5;d++);//Si empieza la oca en el 8
+							
+							if(d<=5){ //En el caso de que este en la posicion 
+				                  posicion[turno]=posicion[turno]+5;
+				                  printf("\n OCA El jugador %d se encuentra en la posicion %d \n",turno+1,posicion[turno]);
+				                  continue;
+							  }
 					  
-			 if((4+i*9)==posicion[turno]){ //En el caso de que este en la posicion 
-			 
-		  			      posicion[turno]=posicion[turno]+4;
-		  			      printf("\n El jugador %d se encuentra en la posicion %d ",turno+1,posicion[turno]);
-		  			      
-		  			      continue;
-					  }
-		   
-	    for(d=0;(8+d*9)!=posicion[turno] && d<=5;d++);//Si empieza la oca en el 8
-					
-					if(d<=5){ //En el caso de que este en la posicion 
-		                  posicion[turno]=posicion[turno]+5;
-		                  printf("\n El jugador %d se encuentra en la posicion %d ",turno+1,posicion[turno]);
-		                  continue;
-					  }
-			  
-	    switch(posicion[turno]){
-	    
-	//PUENTE		
-	    	case 5:
-	    		 posicion[turno]=11;
-	    		 printf("El jugador %d se encuentra en la posicion %d ",turno+1,posicion[turno]);
-			continue;	
-	   		
-	   		case 11:
-	   			 posicion[turno]=5;
-	   			 printf("El jugador %d se encuentra en la posicion %d ",turno+1,posicion[turno]);
-	   		continue;	 
-	//POSADA
-	    	case 18:
-	    		if(boton==0){
-	    			
-				}
-	             break;
-	//DADOS			
-	    	case 25:
-	    		 posicion[turno]=52;
-	   		break;
-	    		
-	   		case 52:
-	   			 posicion[turno]=25;
-	        break;
-	//POZO   			
-	        case 29:
-	        	
-	        	break;
-	//LABERINTO
-	       	case 41:
-	       		posicion[turno]=30;
-	       		break;
-	//CARCEL
-	        case 51:
-	        	
-	        	break;
-	//LA MUERTE
-		 case 57:
-			posicion[turno]=0;
-	        	break;			
-	}
-	//////////////////////////////////////////////////////////RESTRICCIONES DEL JUEGO///////////////////////////////////////////////////////////				
-	
+			    switch(posicion[turno]){
+			    
+			//PUENTE		
+			    	case 5:
+			    		 posicion[turno]=11;
+			    		 printf("\n PUENTE El jugador %d se encuentra en la posicion %d \n",turno+1,posicion[turno]);
+					continue;	
+			   		
+			   		case 11:
+			   			 posicion[turno]=5;
+			   			 printf("\n PUENTE El jugador %d se encuentra en la posicion %d \n",turno+1,posicion[turno]);
+			   		continue;	 
+			//POSADA
+			    	
+			//DADOS			
+			    	case 25:
+			    		 posicion[turno]=52;
+			   		break;
+			    		
+			   		case 52:
+			   			 posicion[turno]=25;
+			        break;
+			//POZO   			
+			        case 29:
+			        	
+			        	break;
+			//LABERINTO
+			       	case 41:
+			       		posicion[turno]=30;
+			       		break;
+			//CARCEL
+			        case 51:
+			        	
+			        	break;
+			//LA MUERTE
+				 case 57:
+					posicion[turno]=0;
+			        	break;			
+			}
+			//////////////////////////////////////////////////////////RESTRICCIONES DEL JUEGO///////////////////////////////////////////////////////////				
+			
+						
+			//Hace que retroceda las casillas en caso de pasarme de la meta 
+		 		   if(posicion[turno]>casillas){
 				
-	//Hace que retroceda las casillas en caso de pasarme de la meta 
-	if(posicion[turno]>casillas){
-		
-	  	 		    	posicion[turno]=casillas*2-posicion[turno];
-	 			 }	
+		                posicion[turno]=casillas*2-posicion[turno];
+			 		}	
 			
 			
 			if(posicion[turno]==casillas){ //indica el jugador que ha ganado
@@ -106,7 +106,7 @@
 	  		       aux--;
 			
 			}
-			turno=(turno+1)%ne; //cambia turno
+		turno=(turno+1)%ne; //cambia turno
 		}
 		else{ //salta turno dl jugador que ha ganado
 			printf("Salta turno ");
@@ -117,4 +117,3 @@
 	
 	}while(aux>1);
 	}
-
