@@ -1,8 +1,8 @@
-		#include <stdio.h>
+			#include <stdio.h>
 	#include <stdlib.h>
 	int main (void){
 	
-	int posicion[6]={0,0,0,0,0,0}, ne, casillas=63, dado=0, turno=0, i=0, d=0,posa=0, aux=0, car=0, poz=0;
+	int posicion[6]={0,0,0,0,0,0}, ne, casillas=63, dado=0, turno=0, i=0, d=0,posa=0, aux=0, car=0, poz=0,sw,ultiposa=0,ultipozo=0,ulticar=0;
 	char op;
 	
 	do{	//Va a guardar el numero de jugadores se quieren usar.
@@ -19,35 +19,47 @@
 		if(posicion[turno]!=casillas){ //comprueba si el jugador todavia no ha ganado
 		
 			
-			if(posicion[turno]==18 && posa==1){//COMPROBAMOS LA POSADA  
+			if(posicion[turno]==18 && posa==1 && ultiposa==turno){//COMPROBAMOS LA POSADA  
+				
 				posa=0;
 				turno=(turno+1)%ne;
+			
 			
 				
 			}
 			
-			if(posicion[turno]==10 && car>0 && car<5){//COMPROBAMOS LA CARCEL
+			
+				
+			if(posicion[turno]==29 && poz==1 && ultipozo==turno){// COMPROBAMOS POZO
+				
+			
+				if(aux<4){//EN EL CASO DE QUE SEAN MENOS DE 4 JUGADORES
+					
+			 		for(i=0; i<ne && posicion[i]!=18;i++);// Me dice si hay jugador en la posada
+					for(d=0;d<ne && posicion[d]!=10;d++);//Me dice si hay jugador en la carcel.
+				
+					if(i<ne&&d<ne){
+		                poz=0;
+		                printf("Ya has salido del pozo");
+							
+					}else{
+						turno=(turno+1)%ne;
+						
+					}
+				
+				}else{//EN EL CASO DE QUE SEAN MAS DE 4 JUGADORES
+				
+						turno=(turno+1)%ne;
+				}
+			}
+			
+			if(posicion[turno]==51 && car>0 && car<5 && ulticar==turno){//COMPROBAMOS LA CARCEL
 			printf("\n jugador, ya han pasado %d turnos\n ", car);
 				turno=(turno+1)%ne;
 				car++;
 				if(car==5){
 					car=0;
 				} 
-			}
-				
-			if(posicion[turno]==29 && poz==1){// COMPROBAMOS POZO
-				printf(" \nACABAS DE ENTRAR EN EL POZO\n ");
-			
-				for(i=0; i<ne && posicion[i]!=18;i++);// Me dice si hay jugador en la posada
-				for(d=0;d<ne && posicion[d]!=10;d++);//Me dice si hay jugador en la carcel.
-				
-				if(i<ne&&d<ne){
-	                poz=0;
-						
-				}else{
-					turno=(turno+1)%ne;
-					
-				}
 			}
 				
 			
@@ -64,7 +76,7 @@
 				
 			//HACE LOS SALTOS DE LAS OCAS
 			
-			/*
+			
 			    for(i=0;(4+i*9)!=posicion[turno] && i<=5;i++);//Si empieza la oca en el 4
 							  
 					 if((4+i*9)==posicion[turno]){ //En el caso de que este en la posicion 
@@ -82,14 +94,14 @@
 				                  printf("\n OCA El jugador %d se encuentra en la posicion %d \n",turno+1,posicion[turno]);
 				                  continue;//Asi vuelve a pedir los dados al mismo jugador despues de caer
 							  } 
-			*/
+			
 	 
 							  
 					  
 			    switch(posicion[turno]){
 			    
 			//PUENTE		
-			/*
+			
 			    	case 5:
 			    		 posicion[turno]=11;
 			    		 printf("\n PUENTE El jugador %d se encuentra en la posicion %d \n",turno+1,posicion[turno]);
@@ -99,14 +111,15 @@
 			   			 posicion[turno]=5;
 			   			 printf("\n PUENTE El jugador %d se encuentra en la posicion %d \n",turno+1,posicion[turno]);
 			   		continue;
-			   		*/
+			   		
 			//POSADA	   
 					   
 					case 18:
 						printf("Estas en la posada\n ");
+						ultiposa=turno;
 						posa=1;
 					break;
-					/*	 
+					 
 			
 			//DADOS			
 			    	case 25:
@@ -119,20 +132,22 @@
 			   			 posicion[turno]=25;
 			   		
 					 continue;
-			        */
+			        
 			//POZO   			
 			        case 29:
 			        	printf("Acabas de caer en el pozo. A saber cuando sales...\n");
 			        	poz=1;
+			        	ultipozo=turno;
 			        	break;
 			//LABERINTO
 			       	case 41:
 			       		posicion[turno]=30;
 			       		break;
 			//CARCEL
-			        case 10:
+			        case 51:
 			        	 printf("Estas en la carcel. Sin tirar 4 turnos\n ");
 			        	 car=1;
+			        	 ulticar=turno;
 		        	break;
 			//LA MUERTE
 				 case 57:
