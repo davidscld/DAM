@@ -1,6 +1,6 @@
 	/////////////YA ESTA CORREGIDO EL QUE JUGANDO EN EL POZO SOLO HAYA DOS JUGADORES/////////
 	
-	#include <stdio.h>
+		#include <stdio.h>
 	#include <stdlib.h>
 	int main (void){
 	
@@ -33,34 +33,40 @@
 				
 			 		for(i=0; i<ne && posicion[i]!=18;i++);// Me dice si hay jugador en la posada
 					for(d=0;d<ne && posicion[d]!=10;d++);//Me dice si hay jugador en la carcel.
+					
 			
 				if(aux<4){//EN EL CASO DE QUE SEAN MENOS DE 4 JUGADORES
 					
 				
-					if(i<ne&&d<ne){//En el caso de que sean menos de 4 jugadores
+				 if(aux==2){ //EN EL CASO DE QUE SOLO JUGARAN DOS JUGADORES
+				
+				            if(i<ne || d<ne){
+				            	poz=0;
+				            	printf("Ya has salido del pozo");
+							}else{
+								turno=(turno+1)%ne;
+							}
+					 	}
+					
+				if(i<ne&&d<ne){//En el caso de que sean 3 jugadores
 		                poz=0;
 		                printf("Ya has salido del pozo");
 							
-					}else{
+					}else{//Aqui no sales del pozo
 						turno=(turno+1)%ne;
 						
 					}
 				
-				}else if(ne==2){ //EN EL CASO DE QUE SOLO JUGARAN DOS JUGADORES
-				
-		            if(i<ne || d<ne){
-		            	poz=0;
-		            	printf("Ya has salido del pozo");
-					}
 					  	
 						turno=(turno+1)%ne;
-				}
 				
-				else{//EN EL CASO DE QUE SEAN MAS DE 4 JUGADORES
+				//EN EL CASO DE QUE SEAN MAS DE 4 JUGADORES, NUNCA SALDRIA A MENOS QUE CAYERA UNO EN LA MISMA CASILLA
+				}else{
 				
 						turno=(turno+1)%ne;
 				}
 			}
+			
 			
 			if(posicion[turno]==51 && car>0 && car<5 && ulticar==turno){/////////COMPROBAMOS LA CARCEL
 			printf("\n jugador, ya han pasado %d turnos\n ", car);
