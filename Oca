@@ -1,4 +1,6 @@
-			#include <stdio.h>
+	/////////////YA ESTA CORREGIDO EL QUE JUGANDO EN EL POZO SOLO HAYA DOS JUGADORES/////////
+	
+	#include <stdio.h>
 	#include <stdlib.h>
 	int main (void){
 	
@@ -19,26 +21,23 @@
 		if(posicion[turno]!=casillas){ //comprueba si el jugador todavia no ha ganado
 		
 			
-			if(posicion[turno]==18 && posa==1 && ultiposa==turno){//COMPROBAMOS LA POSADA  
+			if(posicion[turno]==18 && posa==1 && ultiposa==turno){///////////COMPROBAMOS LA POSADA  
 				
-				posa=0;
+				posa=0;//Con esto hacemos que el jugador que este no vuelva a entrar en la siguiente ronda
 				turno=(turno+1)%ne;
-			
-			
+
+			}			
 				
-			}
-			
-			
+			if(posicion[turno]==29 && poz==1 && ultipozo==turno){//////////// COMPROBAMOS POZO
 				
-			if(posicion[turno]==29 && poz==1 && ultipozo==turno){// COMPROBAMOS POZO
 				
+			 		for(i=0; i<ne && posicion[i]!=18;i++);// Me dice si hay jugador en la posada
+					for(d=0;d<ne && posicion[d]!=10;d++);//Me dice si hay jugador en la carcel.
 			
 				if(aux<4){//EN EL CASO DE QUE SEAN MENOS DE 4 JUGADORES
 					
-			 		for(i=0; i<ne && posicion[i]!=18;i++);// Me dice si hay jugador en la posada
-					for(d=0;d<ne && posicion[d]!=10;d++);//Me dice si hay jugador en la carcel.
 				
-					if(i<ne&&d<ne){
+					if(i<ne&&d<ne){//En el caso de que sean menos de 4 jugadores
 		                poz=0;
 		                printf("Ya has salido del pozo");
 							
@@ -47,13 +46,23 @@
 						
 					}
 				
-				}else{//EN EL CASO DE QUE SEAN MAS DE 4 JUGADORES
+				}else if(ne==2){ //EN EL CASO DE QUE SOLO JUGARAN DOS JUGADORES
+				
+		            if(i<ne || d<ne){
+		            	poz=0;
+		            	printf("Ya has salido del pozo");
+					}
+					  	
+						turno=(turno+1)%ne;
+				}
+				
+				else{//EN EL CASO DE QUE SEAN MAS DE 4 JUGADORES
 				
 						turno=(turno+1)%ne;
 				}
 			}
 			
-			if(posicion[turno]==51 && car>0 && car<5 && ulticar==turno){//COMPROBAMOS LA CARCEL
+			if(posicion[turno]==51 && car>0 && car<5 && ulticar==turno){/////////COMPROBAMOS LA CARCEL
 			printf("\n jugador, ya han pasado %d turnos\n ", car);
 				turno=(turno+1)%ne;
 				car++;
@@ -61,15 +70,14 @@
 					car=0;
 				} 
 			}
-				
-			
+			//PIDO LOS DADOS
 			
 			do{
-				printf("Jugador %d indica el dado: ",turno+1);
+				printf("Jugador %d indica el dado: ",turno+1); 
 				scanf("%d",&dado);
 			
 			}while(dado<1 || dado>6);
-			posicion[turno]+=dado;
+			posicion[turno]+=dado;// Sumo sus dados al total
 			printf("\n El jugador %d se encuentra en la posicion %d \n",turno+1,posicion[turno]);
 			
 			//////////////////////////////////////////////////////////RESTRICCIONES DEL JUEGO///////////////////////////////////////////////////////////				
