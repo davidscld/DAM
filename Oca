@@ -1,4 +1,4 @@
-		#include <stdio.h>
+	#include <stdio.h>
 	#include <stdlib.h>
 	int main (void){
 
@@ -25,7 +25,7 @@
 			if(posicion[turno]==29 && poz==1 && ultipozo==turno){// COMPROBAMOS POZO
 				if(aux<4){//EN EL CASO DE QUE SEAN MENOS DE 4 JUGADORES
 			 		for(i=0; i<ne && posicion[i]!=18;i++);// Me dice si hay jugador en la posada
-					for(d=0;d<ne && posicion[d]!=10;d++);//Me dice si hay jugador en la carcel.
+					for(d=0;d<ne && posicion[d]!=51;d++);//Me dice si hay jugador en la carcel.
                if(aux==2){ //EN EL CASO DE QUE SOLO JUGARAN DOS JUGADORES
 						if(i<ne || d<ne){
                   	poz=0;
