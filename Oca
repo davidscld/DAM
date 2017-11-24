@@ -145,7 +145,7 @@
 		turno=(turno+1)%ne; //cambia turno
 		}
 		else{ //salta turno dl jugador que ha ganado
-			printf("Salta turno ");
+			printf("Salta turno\n ");
 			turno=(turno+1)%ne;
 		}
 	}while(aux>1);
